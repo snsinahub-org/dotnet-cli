@@ -76,3 +76,15 @@ runs:
         }
       shell: powershell
       if: ${{ inputs.dotnet_action == 'publish' && inputs.dotnet_web_publish == 'true'}}
+    - run: |
+        cd "${{ inputs.path }}"
+        if(!(test-path "${{ inputs.temp_path }}")) {
+          mkdir "${{ inputs.temp_path }}"
+        }       
+        
+        Get-ChildItem -Path .\  -Filter "*.csproj" -File  -Name |  ForEach-Object {
+            echo "dotnet publish $_ --configuration ${{ inputs.build_configuration }} --output ${{ inputs.temp_path }} /property:Version=${{ inputs.newTag }}"
+            dotnet publish $_ --configuration "${{ inputs.build_configuration }}" --output "${{ inputs.temp_path }}" /property:Version="${{ inputs.newTag }}"
+        }        
+      shell: powershell
+      if: ${{ inputs.dotnet_action == 'publish' && inputs.dotnet_web_publish != 'true'}}
