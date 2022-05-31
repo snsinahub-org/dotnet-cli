@@ -22,7 +22,7 @@ runs:
   steps:
     - run: |
         cd "${{ inputs.path }}"        
-        mkdir ${{ inputs.temp_path }}
+        mkdir "${{ inputs.temp_path }}"
         Get-ChildItem -Path .\  -Recurse -Filter "wwwroot" -Directory  -Name|  ForEach-Object {
             $pt =  (get-item $_ ).parent.FullName
             cd $pt
