@@ -74,6 +74,7 @@ runs:
             # $pt =  (get-item $_ ).parent.FullName
             # cd $pt
             $NAME= (get-item "${{ inputs.file_extenstion }}")
+            echo --- NAME ---
             echo $NAME
             if((test-path -Path ".\$NAME")) {
               dotnet publish $NAME --configuration "${{ inputs.build_configuration }}" --output "${{ inputs.temp_path }}" /property:Version="${{ inputs.newTag }}"
