@@ -29,9 +29,9 @@ runs:
             # pwd
             $pt =  (get-item $_ ).parent.FullName
             echo "parent folder" $pt
-            # cd ${{ inputs.path }}\$pt
+            cd $pt
             echo -----
-            echo "${{ inputs.path }}"
+            pwd
             # Get-ChildItem -Path .\   -Filter "*.csproj" -File  -Name |  ForEach-Object {
             #     dotnet publish $_ --configuration ${{ inputs.build_configuration }} --output "${{ inputs.temp_path }}" /property:Version=${{ inputs.newTag }} 
             # }
