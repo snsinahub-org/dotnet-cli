@@ -70,9 +70,11 @@ runs:
             echo $_
             echo "---->"
             cd ..
+            pwd
             # $pt =  (get-item $_ ).parent.FullName
             # cd $pt
-            $NAME= (Get-Item *.csproj)
+            $NAME= (get-item "${{ inputs.file_extenstion }}")
+            echo $NAME
             dotnet publish $NAME --configuration "${{ inputs.build_configuration }}" --output "${{ inputs.temp_path }}" /property:Version="${{ inputs.newTag }}"
 
             # echo "${{ inputs.path }}"
