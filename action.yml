@@ -25,10 +25,10 @@ runs:
         mkdir "${{ inputs.temp_path }}"
         Get-ChildItem -Path .\  -Recurse -Filter "wwwroot" -Directory  -Name|  ForEach-Object {
             $pt =  (get-item $_ ).parent.FullName
-            cd $pt
+            cd "$pt"
             Get-ChildItem -Path .\  -Filter "*.csproj" -File  -Name |  ForEach-Object {
                 echo "dotnet publish $_ --configuration ${{ inputs.build_configuration }} --output ${{ inputs.temp_path }} /property:Version=${{ inputs.newTag }}"
-                dotnet publish $_ --configuration ${{ inputs.build_configuration }} --output "${{ inputs.temp_path }}" /property:Version=${{ inputs.newTag }}                 
+                dotnet publish $_ --configuration "${{ inputs.build_configuration }}"" --output "${{ inputs.temp_path }}" /property:Version="${{ inputs.newTag }}"
             }
         }
       shell: powershell
