@@ -4,18 +4,31 @@ inputs:
   path:  
     description: 'path'
     required: true
+  test_path:  
+    description: 'test-path'
+    required: false
   newTag:  
     description: 'newTag'
-    required: true
+    required: false
+  file_extenstion:
+    description: "file extension"
+    required: false
   temp_path:  
     description: 'temp_path'
-    required: true
+    required: false
   build_configuration:
     description: "build configuration"
-    required: true
+    required: false
+  test_depth:
+    description: "test_depth"
+    required: false
   dotnet_action:
     description: "available actions: restore, build, test, publish"
     required: true
+  dotnet_web_publish:
+    description: "publish web application or not"
+    required: false
+    default: 'true'
 outputs:
   random-number:
     description: "Random number"
@@ -23,6 +36,30 @@ outputs:
 runs:
   using: "composite"
   steps:
+    - run: |
+        cd "${{ inputs.path }}"
+        Get-ChildItem -Path .\ -Filter ${{ inputs.file_extenstion }} -Depth 1 -Recurse -File -Name| ForEach-Object {            
+            dotnet restore $_
+        }
+      shell: powershell
+      if: ${{ inputs.dotnet_action == 'restore' }}
+    - run: |
+        cd "${{ inputs.path }}"
+        Get-ChildItem -Path .\ -Filter ${{ inputs.file_extenstion }} -Depth 1 -Recurse -File -Name| ForEach-Object {            
+            dotnet build $_ --configuration ${{ inputs.build_configuration }} 
+        }
+      shell: powershell
+      if: ${{ inputs.dotnet_action == 'build' }}
+    - run: |
+        cd "${{ inputs.path }}"
+        if(!(test-path "${{ inputs.temp_path }}")) {
+          mkdir "${{ inputs.temp_path }}"
+        }
+        Get-ChildItem -Path ".\${{ inputs.test_path }}" -Filter ${{ inputs.file_extenstion }} -Depth ${{ inputs.test_depth }} -Recurse -File -Name| ForEach-Object {            
+            dotnet test $_ --logger trx --results-directory "${{ inputs.temp_path }}" --configuration ${{ inputs.build_configuration }}
+        }
+      shell: powershell
+      if: ${{ inputs.dotnet_action == 'test' }}
     - run: |
         cd "${{ inputs.path }}"
         if(!(test-path "${{ inputs.temp_path }}")) {
@@ -38,4 +75,4 @@ runs:
             }
         }
       shell: powershell
-      if: ${{ inputs.dotnet_action == 'publish' }}
+      if: ${{ inputs.dotnet_action == 'publish' && inputs.dotnet_web_publish == 'true'}}
