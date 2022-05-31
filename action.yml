@@ -65,20 +65,21 @@ runs:
         if(!(test-path "${{ inputs.temp_path }}")) {
           mkdir "${{ inputs.temp_path }}"
         }
+
         
-        Get-ChildItem -Path .\ -Depth 1 -Recurse -Filter "wwwroot" -Directory  -Name|  ForEach-Object {
-            echo $_
-            echo "---->"
-            cd ..
+        
+        Get-ChildItem -Path .\  -Recurse -Depth 1 -Filter "wwwroot" -Directory  -Name |  ForEach-Object {
+            cd $_
+            cd ../
             pwd
             # $pt =  (get-item $_ ).parent.FullName
             # cd $pt
             $NAME= (get-item "${{ inputs.file_extenstion }}")
             echo --- NAME ---
             echo $NAME
-            if((test-path -Path ".\$NAME")) {
+            # if((test-path -Path ".\$NAME")) {
               dotnet publish $NAME --configuration "${{ inputs.build_configuration }}" --output "${{ inputs.temp_path }}" /property:Version="${{ inputs.newTag }}"
-            }
+            # }
 
             # echo "${{ inputs.path }}"
             # echo ----
