@@ -13,6 +13,9 @@ inputs:
   build_configuration:
     description: "build configuration"
     required: true
+  dotnet_action:
+    description: "available actions: restore, build, test, publish"
+    required: true
 outputs:
   random-number:
     description: "Random number"
@@ -35,3 +38,4 @@ runs:
             }
         }
       shell: powershell
+      if: ${{ inputs.dotnet_action == 'publish' }}
