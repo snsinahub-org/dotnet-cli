@@ -67,14 +67,18 @@ runs:
         }
         
         Get-ChildItem -Path .\  -Recurse -Filter "wwwroot" -Directory  -Name|  ForEach-Object {
-            $pt =  (get-item $_ ).parent.parent.FullName
-            echo "${{ inputs.path }}"
-            echo ----
-            echo "$pt"
-            cd "$pt"
-            Get-ChildItem -Path .\  -Filter "${{ inputs.file_extenstion }}" -File  -Name |  ForEach-Object {
-                dotnet publish $_ --configuration "${{ inputs.build_configuration }}" --output "${{ inputs.temp_path }}" /property:Version="${{ inputs.newTag }}"
-            }
+            $pt =  (get-item $_ ).parent.FullName
+            cd $pt
+            $NAME= (Get-Item *.csproj)
+            dotnet publish $NAME --configuration "${{ inputs.build_configuration }}" --output "${{ inputs.temp_path }}" /property:Version="${{ inputs.newTag }}"
+
+            # echo "${{ inputs.path }}"
+            # echo ----
+            # echo "$pt"
+            # cd "$pt"
+            # Get-ChildItem -Path .\  -Filter "${{ inputs.file_extenstion }}" -File  -Name |  ForEach-Object {
+            #     dotnet publish $_ --configuration "${{ inputs.build_configuration }}" --output "${{ inputs.temp_path }}" /property:Version="${{ inputs.newTag }}"
+            # }
         }
       shell: powershell
       if: ${{ inputs.dotnet_action == 'publish' && inputs.dotnet_web_publish == 'true'}}
