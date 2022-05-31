@@ -32,8 +32,11 @@ runs:
             cd $pt
             echo -----
             pwd
-            Get-ChildItem -Path .\   -Filter "*.csproj" -File  -Name |  ForEach-Object {
-                dotnet publish $_ --configuration ${{ inputs.build_configuration }} --output "${{ inputs.temp_path }}" /property:Version=${{ inputs.newTag }} 
+            Get-ChildItem -Path .\  -Filter "*.csproj" -File  -Name |  ForEach-Object {
+                # dotnet publish $_ --configuration ${{ inputs.build_configuration }} --output "${{ inputs.temp_path }}" /property:Version=${{ inputs.newTag }} 
+                echo '>>>>>'
+                echo $_
+                pwd
             }
         }
       shell: powershell
