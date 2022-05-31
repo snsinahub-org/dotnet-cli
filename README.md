@@ -10,7 +10,7 @@
 Based on each action type, different sets of inputs are needed. Please refer to list of available inputs
 
 ```YAML
-- uses: snsinahub-org/dotnet-cli@main
+- uses: snsinahub-org/dotnet-cli@v1.0.0
   with:
     
     # full path of directory containing all dotnet projects
@@ -81,7 +81,7 @@ Based on each action type, different sets of inputs are needed. Please refer to 
       with:
         dotnet-version: '3.1.x' # SDK Version to use; x will use the latest version of the 3.1 channel
     - name: donet publish
-      uses : snsinahub-org/dotnet-cli@main
+      uses : snsinahub-org/dotnet-cli@v1.0.0
       with:
         dotnet_action: 'build'
         path: 'C:\Users\Siavash Namvar\a'
@@ -97,7 +97,7 @@ Based on each action type, different sets of inputs are needed. Please refer to 
       with:
         dotnet-version: '3.1.x' # SDK Version to use; x will use the latest version of the 3.1 channel
     - name: donet publish
-      uses : snsinahub-org/dotnet-cli@main
+      uses : snsinahub-org/dotnet-cli@v1.0.0
       with:
         dotnet_action: 'restore'
         path: 'C:\Users\Siavash Namvar\a'
@@ -112,7 +112,7 @@ Based on each action type, different sets of inputs are needed. Please refer to 
       with:
         dotnet-version: '3.1.x' # SDK Version to use; x will use the latest version of the 3.1 channel
     - name: donet publish
-      uses : snsinahub-org/dotnet-cli@main
+      uses : snsinahub-org/dotnet-cli@v1.0.0
       with:
         dotnet_action: 'test'
         path: 'C:\Users\Siavash Namvar\a'
@@ -135,7 +135,7 @@ Based on each action type, different sets of inputs are needed. Please refer to 
       with:
         dotnet-version: '3.1.x' # SDK Version to use; x will use the latest version of the 3.1 channel
     - name: donet publish
-      uses : snsinahub-org/dotnet-cli@main
+      uses : snsinahub-org/dotnet-cli@v1.0.0
       with:
         dotnet_action: 'publish'
         path: 'C:\Users\Siavash Namvar\a'
@@ -155,7 +155,7 @@ Based on each action type, different sets of inputs are needed. Please refer to 
       with:
         dotnet-version: '3.1.x' # SDK Version to use; x will use the latest version of the 3.1 channel
     - name: donet publish
-      uses : snsinahub-org/dotnet-cli@main
+      uses : snsinahub-org/dotnet-cli@v1.0.0
       with:
         dotnet_action: 'publish'
         path: 'C:\Users\Siavash Namvar\a'
