@@ -28,7 +28,7 @@ runs:
             echo $_
             # pwd
             $pt =  (get-item $_ ).parent.FullName
-            echo "parent folder $pt"
+            echo "parent folder" $pt
             cd ${{ inputs.path }}\$pt
             echo -----
             echo pwd
