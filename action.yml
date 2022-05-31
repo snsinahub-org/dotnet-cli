@@ -24,14 +24,8 @@ runs:
         cd "${{ inputs.path }}"
         pwd
         Get-ChildItem -Path .\  -Recurse -Filter "wwwroot" -Directory  -Name|  ForEach-Object {
-            pwd
-            echo $_
-            # pwd
             $pt =  (get-item $_ ).parent.FullName
-            echo "parent folder" $pt
             cd $pt
-            echo -----
-            pwd
             Get-ChildItem -Path .\  -Filter "*.csproj" -File  -Name |  ForEach-Object {
                 # dotnet publish $_ --configuration ${{ inputs.build_configuration }} --output "${{ inputs.temp_path }}" /property:Version=${{ inputs.newTag }} 
                 echo '>>>>>'
