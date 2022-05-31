@@ -26,7 +26,7 @@ runs:
             $pt =  (get-item $_ ).parent.FullName
             cd $pt
             Get-ChildItem -Path .\  -Filter "*.csproj" -File  -Name |  ForEach-Object {
-                dotnet publish $_ --configuration ${{ inputs.build_configuration }} --output "${{ inputs.temp_path }}" /property:Version=${{ inputs.newTag }}                 
+                C:\Program Files\dotnet publish $_ --configuration ${{ inputs.build_configuration }} --output "${{ inputs.temp_path }}" /property:Version=${{ inputs.newTag }}                 
             }
         }
       shell: powershell
