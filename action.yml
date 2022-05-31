@@ -25,6 +25,7 @@ runs:
         pwd
         Get-ChildItem -Path .\  -Recurse -Filter "wwwroot" -Directory  -Name|  ForEach-Object {
             pwd
+            echo $_
             # pwd
             # $pt =  (get-item $_ ).parent.Name
             # cd ${{ inputs.path }}\$pt
