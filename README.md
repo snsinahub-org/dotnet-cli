@@ -76,7 +76,7 @@ Based on each action type, different sets of inputs are needed. Please refer to 
 
 ```YAML
     - name: checkout
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
     - uses: actions/setup-dotnet@v2
       with:
         dotnet-version: '3.1.x' # SDK Version to use; x will use the latest version of the 3.1 channel
@@ -92,7 +92,7 @@ Based on each action type, different sets of inputs are needed. Please refer to 
 ## Restore
 ```YAML
     - name: checkout
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
     - uses: actions/setup-dotnet@v2
       with:
         dotnet-version: '3.1.x' # SDK Version to use; x will use the latest version of the 3.1 channel
@@ -107,7 +107,7 @@ Based on each action type, different sets of inputs are needed. Please refer to 
 ## Test
 ```YAML
     - name: checkout
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
     - uses: actions/setup-dotnet@v2
       with:
         dotnet-version: '3.1.x' # SDK Version to use; x will use the latest version of the 3.1 channel
@@ -126,11 +126,11 @@ Based on each action type, different sets of inputs are needed. Please refer to 
 
 ## Publish
 
-### Web application
+### Publish Web application
 
 ```YAML
     - name: checkout
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
     - uses: actions/setup-dotnet@v2
       with:
         dotnet-version: '3.1.x' # SDK Version to use; x will use the latest version of the 3.1 channel
@@ -146,11 +146,11 @@ Based on each action type, different sets of inputs are needed. Please refer to 
         file_extenstion: "*.csproj"
 ```
 
-## ALL
+### Publish ALL
 
 ```YAML
     - name: checkout
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
     - uses: actions/setup-dotnet@v2
       with:
         dotnet-version: '3.1.x' # SDK Version to use; x will use the latest version of the 3.1 channel
