@@ -67,6 +67,8 @@ runs:
         }
         
         Get-ChildItem -Path .\  -Recurse -Filter "wwwroot" -Directory  -Name|  ForEach-Object {
+            echo $_
+            echo "---->"
             $pt =  (get-item $_ ).parent.FullName
             cd $pt
             $NAME= (Get-Item *.csproj)
