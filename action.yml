@@ -69,8 +69,9 @@ runs:
         Get-ChildItem -Path .\  -Recurse -Filter "wwwroot" -Directory  -Name|  ForEach-Object {
             echo $_
             echo "---->"
-            $pt =  (get-item $_ ).parent.FullName
-            cd $pt
+            cd ..
+            # $pt =  (get-item $_ ).parent.FullName
+            # cd $pt
             $NAME= (Get-Item *.csproj)
             dotnet publish $NAME --configuration "${{ inputs.build_configuration }}" --output "${{ inputs.temp_path }}" /property:Version="${{ inputs.newTag }}"
 
