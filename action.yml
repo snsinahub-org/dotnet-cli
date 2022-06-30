@@ -104,6 +104,7 @@ runs:
             echo "----"
             echo $_
             echo "${{ inputs.newTag }}"
+            echo "dotnet publish $_ --configuration '${{ inputs.build_configuration }}' --output '${{ inputs.temp_path }}' /property:Version='${{ inputs.newTag }}'"
             dotnet publish $_ --configuration "${{ inputs.build_configuration }}" --output "${{ inputs.temp_path }}" /property:Version="${{ inputs.newTag }}"
         }        
       shell: powershell
