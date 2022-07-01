@@ -96,9 +96,7 @@ runs:
         if(!(test-path "${{ inputs.temp_path }}")) {
           mkdir "${{ inputs.temp_path }}"
         }       
-        echo "${{ inputs.path }}"
-        echo "----"
-        "${{ inputs.temp_path }}"
+        
         
         Get-ChildItem -Path .\ -Recurse -Filter "${{ inputs.file_extenstion }}"  -Depth 1 -File  -Name |  ForEach-Object {
             echo "----"
