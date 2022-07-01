@@ -29,6 +29,14 @@ inputs:
     description: "publish web application or not"
     required: false
     default: 'true'
+  runtime:
+    description: "specifiy runtime os"
+    required: false
+    default: 'windows'
+  self_contained:
+    description: "self_contained"
+    required: false
+    default: 'false'
 outputs:
   random-number:
     description: "Random number"
@@ -107,3 +115,19 @@ runs:
         }        
       shell: powershell
       if: ${{ inputs.dotnet_action == 'publish' && inputs.dotnet_web_publish != 'true'}}
+    - run: |
+        cd "${{ inputs.path }}"
+        if(!(test-path "${{ inputs.temp_path }}")) {
+          mkdir "${{ inputs.temp_path }}"
+        }       
+        
+        
+        Get-ChildItem -Path .\ -Recurse -Filter "${{ inputs.file_extenstion }}"  -Depth 1 -File  -Name |  ForEach-Object {
+            echo "----"
+            echo $_
+            echo "${{ inputs.newTag }}"
+            echo "dotnet publish $_ --configuration '${{ inputs.build_configuration }}' --output '${{ inputs.temp_path }}' /property:Version='${{ inputs.newTag }}'"
+            dotnet publish $_ --configuration "${{ inputs.build_configuration }}" --output "${{ inputs.temp_path }}" /property:Version="${{ inputs.newTag }}" --runtime "${{ inputs.runtime }}" --self-contained "${{ inputs.self_contained }}"
+        }        
+      shell: powershell
+      if: ${{ inputs.dotnet_action == 'publish' && inputs.dotnet_web_publish != 'true' && inputs.runtime != 'windows' }}
